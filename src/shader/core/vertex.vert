@@ -9,6 +9,13 @@ layout(location = 4) in vec4 color;
 out vec2 f_uv;
 out vec4 f_color;
 
+const mat4 INVERT_Y_AXIS = mat4(
+    vec4(1.0, 0.0, 0.0, 0.0),
+    vec4(0.0, -1.0, 0.0, 0.0),
+    vec4(0.0, 0.0, 1.0, 0.0),
+    vec4(0.0, 0.0, 0.0, 1.0)
+);
+
 // generate positional data based on vertex ID
 void main() {
     vec2 pos = vec2(0.0);
@@ -40,5 +47,5 @@ void main() {
     }
 
     f_color = color;
-    gl_Position = transform * vec4(pos, left_top.z, 1.0);
+    gl_Position = INVERT_Y_AXIS * transform * vec4(pos, left_top.z, 1.0);
 }
